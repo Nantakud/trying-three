@@ -2,8 +2,6 @@ import "./style.css";
 
 import * as THREE from "three";
 
-import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
-
 //three main components: scene, camera and renderer
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(
@@ -19,6 +17,7 @@ const renderer = new THREE.WebGLRenderer({
 renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setSize(window.innerWidth, window.innerHeight);
 camera.position.setZ(30);
+camera.position.setX(-3);
 
 renderer.render(scene, camera);
 
@@ -32,7 +31,7 @@ const torus = new THREE.Mesh(geometry, material);
 scene.add(torus);
 
 const texture = new THREE.TextureLoader().load("images/question_mark.jpg");
-const normalTexture = new THREE.TextureLoader().load("images/background.jpg");
+const normalTexture = new THREE.TextureLoader().load("images/normal_map.jpg");
 
 const questionMark = new THREE.Mesh(
   new THREE.IcosahedronGeometry(10),
@@ -40,16 +39,19 @@ const questionMark = new THREE.Mesh(
     map: texture,
     metalness: 0.6,
     color: 0xe6dec6,
+    normalMap: normalTexture,
   })
 );
 scene.add(questionMark);
 questionMark.position.y = 11;
-questionMark.position.x = 25;
+questionMark.position.x = 33;
+questionMark.position.z = -11;
 
 const geo3 = new THREE.TorusKnotGeometry(2.4, 3, 100, 16);
+const background = new THREE.TextureLoader().load("images/background.jpg");
 const tube = new THREE.Mesh(
   geo3,
-  new THREE.MeshStandardMaterial({ map: normalTexture })
+  new THREE.MeshStandardMaterial({ map: background })
 );
 scene.add(tube);
 
@@ -57,17 +59,18 @@ scene.add(tube);
 const pointLight = new THREE.PointLight(0xffffff);
 pointLight.position.set(10, 10, 10);
 
+const pointLight2 = new THREE.PointLight(0xff5950);
+pointLight2.position.set(40, 60, -30);
+
 const ambientLight = new THREE.AmbientLight(0xffffff);
 
-scene.add(pointLight, ambientLight);
+scene.add(pointLight, pointLight2, ambientLight);
 
 //help with lights
 const lightHelper = new THREE.PointLightHelper(pointLight);
 const gridHelper = new THREE.GridHelper(200, 50);
 
 scene.add(lightHelper, gridHelper);
-
-const controls = new OrbitControls(camera, renderer.domElement);
 
 function addStar() {
   const geometry = new THREE.SphereGeometry(0.25, 12, 24);
@@ -98,9 +101,25 @@ function animate() {
   questionMark.rotation.y += 0.05;
   questionMark.rotation.z -= 0.09;
 
-  controls.update();
-
   renderer.render(scene, camera);
 }
 
 animate();
+
+function moveCamera() {
+  const t = document.body.getBoundingClientRect().top;
+
+  torus.rotation.x += 0.1;
+  torus.rotation.y += 0.05;
+  torus.rotation.z += 0.01;
+
+  questionMark.rotation.x -= 0.15;
+  questionMark.rotation.y += 0.05;
+  questionMark.rotation.z -= 0.09;
+
+  camera.position.z = t * -0.01;
+  console.log(camera.position.z);
+  camera.position.y = t * -0.002;
+  camera.position.x = t * -0.02;
+}
+document.body.onscroll = moveCamera;

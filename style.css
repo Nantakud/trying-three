@@ -3,3 +3,13 @@ canvas {
   top: 0;
   left: 0;
 }
+
+main {
+  position: absolute;
+  color: white;
+}
+
+p {
+  height: 500px;
+  background-color: rgba(0, 0, 50, 0.8);
+}
