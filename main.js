@@ -16,7 +16,6 @@ const renderer = new THREE.WebGLRenderer({
 
 renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setSize(window.innerWidth, window.innerHeight);
-camera.position.setZ(30);
 camera.position.setX(-3);
 
 renderer.render(scene, camera);
@@ -47,13 +46,15 @@ questionMark.position.y = 11;
 questionMark.position.x = 33;
 questionMark.position.z = -11;
 
-const geo3 = new THREE.TorusKnotGeometry(2.4, 3, 100, 16);
+const geo3 = new THREE.TorusKnotGeometry(2.3, 3, 100, 16);
 const background = new THREE.TextureLoader().load("images/background.jpg");
 const tube = new THREE.Mesh(
   geo3,
   new THREE.MeshStandardMaterial({ map: background })
 );
 scene.add(tube);
+tube.position.x = 60;
+tube.position.z = -15;
 
 //lights
 const pointLight = new THREE.PointLight(0xffffff);
@@ -101,6 +102,9 @@ function animate() {
   questionMark.rotation.y += 0.05;
   questionMark.rotation.z -= 0.09;
 
+  tube.rotation.x += 0.95;
+  tube.rotation.y += 0.95;
+
   renderer.render(scene, camera);
 }
 
@@ -108,6 +112,7 @@ animate();
 
 function moveCamera() {
   const t = document.body.getBoundingClientRect().top;
+  console.log(t);
 
   torus.rotation.x += 0.1;
   torus.rotation.y += 0.05;
@@ -117,9 +122,12 @@ function moveCamera() {
   questionMark.rotation.y += 0.05;
   questionMark.rotation.z -= 0.09;
 
-  camera.position.z = t * -0.01;
-  console.log(camera.position.z);
+  tube.rotation.x += 1;
+  tube.rotation.y += 1;
+  //tube.rotation.z -= 0.09;
+
+  camera.position.z = t * -0.015;
   camera.position.y = t * -0.002;
-  camera.position.x = t * -0.02;
+  camera.position.x = t * -0.002;
 }
 document.body.onscroll = moveCamera;
