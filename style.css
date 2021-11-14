@@ -7,9 +7,53 @@ canvas {
 main {
   position: absolute;
   color: white;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  justify-content: stretch;
+  align-items: stretch;
 }
 
 p {
   height: 500px;
   background-color: rgba(0, 0, 50, 0.8);
+  font-family: "Ceviche One", cursive;
+  font-size: 1em;
+  margin: 1em;
+  padding: 1em;
+}
+
+header {
+  font-family: "Road Rage", cursive;
+}
+
+header h1 {
+  grid-column: 3/4;
+  font-size: 15em;
+}
+
+header p {
+  grid-column-start: 1;
+  grid-column-end: 6;
+  font-size: 3em;
+}
+
+blockquote {
+  grid-column: 2 / span 3;
+  font-size: 2em;
+}
+
+#sentence1 {
+  grid-column: 2/4;
+}
+
+#sentence2 {
+  grid-column: 1 / span 2;
+}
+
+#sentence3 {
+  grid-column: 4/5;
+}
+
+#sentence4 {
+  grid-column: 3/5;
 }

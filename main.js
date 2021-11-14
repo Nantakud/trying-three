@@ -67,12 +67,6 @@ const ambientLight = new THREE.AmbientLight(0xffffff);
 
 scene.add(pointLight, pointLight2, ambientLight);
 
-//help with lights
-const lightHelper = new THREE.PointLightHelper(pointLight);
-const gridHelper = new THREE.GridHelper(200, 50);
-
-scene.add(lightHelper, gridHelper);
-
 function addStar() {
   const geometry = new THREE.SphereGeometry(0.25, 12, 24);
   const material = new THREE.MeshStandardMaterial({ color: 0xc772db });

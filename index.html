@@ -4,13 +4,16 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Web portfolio 3d</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Ceviche+One&family=Road+Rage&display=swap");
+    </style>
+    <title>Three library experiment</title>
   </head>
   <body>
     <canvas id="bg"></canvas>
     <main>
       <header>
-        <h1>Francesco Vacca</h1>
+        <h1 id="title">Francesco Vacca</h1>
         <p>Welcome to my experiment with THREE</p>
       </header>
 
@@ -18,18 +21,22 @@
         <p>I like learning new stuff. 3d is super cool</p>
       </blockquote>
 
-      <p>
+      <p id="sentence1">
         I just started with a youtube tutorial, and add some twists here and
         there
       </p>
 
-      <p>
+      <p id="sentence2">
         Not to enthusiast of the result, but it's fair enough as fist attempt.
       </p>
 
-      <p>I think I'm gonna try something more extreme next time</p>
+      <p id="sentence3">
+        I think I'm gonna try something more extreme next time
+      </p>
 
-      <p>I need something long, so I'm going to cheat with CSS</p>
+      <p id="sentence4">
+        I need something long, so I'm going to cheat with CSS
+      </p>
     </main>
     <div id="app"></div>
     <script type="module" src="/main.js"></script>
