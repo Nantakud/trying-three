@@ -106,7 +106,6 @@ animate();
 
 function moveCamera() {
   const t = document.body.getBoundingClientRect().top;
-  console.log(t);
 
   torus.rotation.x += 0.1;
   torus.rotation.y += 0.05;
@@ -118,7 +117,6 @@ function moveCamera() {
 
   tube.rotation.x += 1;
   tube.rotation.y += 1;
-  //tube.rotation.z -= 0.09;
 
   camera.position.z = t * -0.015;
   camera.position.y = t * -0.002;
